@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        li{
+            list-style:none;
+        }
+        a{
+            text-decoration:none;
+        }
+        .content{
+            height:750px;
+            width:1000px;
+            margin:0 auto;
+            background:rgb(197, 192, 192);
+        }
+        .menuBar{
+            height:30px;
+            width:100%;
+            background-color:rgb(197, 192, 192);
+            position:relative;
+        }
+        .menuBar a{
+            color:black;
+        }
+        .menuBar>ul>li{
+            float:left;
+            font-size:13px;
+            font-weight: bold;
+            width:60px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            cursor:pointer;
+        }
+        .menuBar>ul>li>ul>li{
+            font-size:13px;
+            font-weight: bold;
+            width:60px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            cursor:pointer;
+            background-color:rgb(197, 192, 192);
+        }
+        .menuBar>ul>li:hover>ul{
+            display:block;
+        }
+        .menuBar>ul li:hover{
+            background-color:pink;
+        }
+        .menuBar>ul ul{
+            display:none;
+            position:absolute;
+            z-index:2;
+        }
+        /* 中间部分 */
+        .toolBar{
+            background:grey;
+            height:600px;
+            width:100%;
+            position:relative;
+        }
+        .toolBar div{
+            float:left;
+        }
+        .toolBar-left{
+            height:100%;
+            width:100px;
+            background:rgb(197, 192, 192);
+        }
+        .toolBar-left .shape{
+            height:280px;
+            width:70px;
+            margin-left:15px;
+            border-top:2px solid white;
+            border-left:2px solid white;
+            border-right:2px solid black;
+            border-bottom:2px solid black;
+        }
+        .shape div{
+            width:31px;
+            height:31px;
+            float:left;
+            margin:0px 1px 3.8px 1.5px;
+            background-image:url(./img/big.png);
+        }
+        .shape div:nth-child(1){
+            background-position:3px 2px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(2){
+            background-position:-20px 2px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(3){
+            background-position:3px -22px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(4){
+            background-position:-20px -22px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(5){
+            background-position:3px -44px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(6){
+            background-position:-22px -44px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(7){
+            background-position:2px -70px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(8){
+            background-position:-20px -70px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(9){
+            background-position:3px -96px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(10){
+            background-position:-20px -96px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(11){
+            background-position:2px -123px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(12){
+            background-position:-20px -123px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(13){
+            background-position:3px -149px;
+            border-bottom:1px solid black;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(14){
+            background-position:-20px -149px;
+            border-bottom:1px solid black;
+        }
+        .shape div:nth-child(15){
+            background-position:3px -171px;
+            border-right:1px solid black;
+        }
+        .shape div:nth-child(16){
+            background-position:-20px -171px;
+        }
+        .shape div:hover{
+            border-right:1px solid white;
+            border-bottom:1px solid white;
+        }
+        .shape div img{
+            height:31px;
+            width:31px;
+        }
+        .toolBar-left .type{
+            height:120px;
+            width:50px;
+            margin-top:5px;
+            margin-left:25px;
+            border:1px solid black; 
+            border-left:2px solid grey;
+            border-top:2px solid white;
+            border-right:2px solid white;
+            border-bottom:2px solid white;
+        }
+        .type div{
+            margin-left:8px;
+            display:none;
+        }
+        .type .one{
+            font-weight:300;
+        }
+        .type .two{
+            font-weight:400;
+        }
+        .type .three{
+            font-weight:600;
+        }
+        .type .four{
+            font-weight:700;
+        }
+        .type .five{
+            font-weight:800;
+        }
+        .toolBar-right #myCanvas{
+            width: 780px;
+            height:550px;
+            margin-top:3px;
+            margin-left:3px;
+            background:white;
+        }
+        .palette{
+            background:rgb(197, 192, 192);
+            height:70px;
+            width:100%;
+            border-bottom:1px solid black;
+        }
+        .palette .color{
+            height:48px;
+            width:338px;
+            border:1px solid white;
+            background:white;
+        }
+        .palette .color div{
+            width:22px;
+            height:22px;
+            float:left;
+            margin:1px 1px 1px 1px;
+            
+        }
+        .color div:nth-child(1){
+            background:black;
+        }
+        .color div:nth-child(2){
+            background:grey;
+        }
+        .color div:nth-child(3){
+            background:brown;
+        }
+        .color div:nth-child(4){
+            background:black;
+        }
+        .color div:nth-child(5){
+            background:rgb(44, 97, 44);
+        }
+        .color div:nth-child(6){
+            background:green;
+        }
+        .color div:nth-child(7){
+            background:rgb(47, 145, 47);
+        }
+        .color div:nth-child(8){
+            background:rgb(38, 38, 165);
+        }
+        .color div:nth-child(9){
+            background:purple;
+        }
+        .color div:nth-child(10){
+            background:rgb(185, 22, 185);
+        }
+        .color div:nth-child(11){
+            background:blue;
+        }
+        .color div:nth-child(12){
+            background:rgb(8, 8, 134);
+        }
+        .color div:nth-child(13){
+            background:rgb(89, 89, 206);
+        }
+        .color div:nth-child(14){
+            background:rgb(134, 12, 12);
+        }
+        .color div:nth-child(15){
+            background:white;
+        }
+        .color div:nth-child(16){
+            background:rgb(209, 203, 203);
+        }
+        .color div:nth-child(17){
+            background:red;
+        }
+        .color div:nth-child(18){
+            background:yellow;
+        }
+        .color div:nth-child(19){
+            background:lightgreen;
+        }
+        .color div:nth-child(20){
+            background:cyan;
+        }
+        .color div:nth-child(21){
+            background:rgb(18, 18, 219);
+        }
+        .color div:nth-child(22){
+            background:rgb(206, 16, 206);
+        }
+        .color div:nth-child(23){
+            background:rgb(240, 240, 120);
+        }
+        .color div:nth-child(24){
+            background:rgb(111, 238, 111);
+        }
+        .color div:nth-child(25){
+            background:rgb(18, 231, 231);
+        }
+        .color div:nth-child(26){
+            background:rgb(139, 139, 219);
+        }
+        .color div:nth-child(27){
+            background:rgb(187, 57, 57);
+        }
+        .color div:nth-child(28){
+            background:orange;
+        }
+        .space{
+            height:3px;
+            width:100%;
+            border-bottom:1px solid black;
+        }
+        .foot span{
+            line-height:47px;
+            padding-left:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="menuBar">
+            <ul class="yiji">
+                <li><a href="#">文件</a>
+                    <ul>
+                        <li id="xinjian"><a href="#">新建</a></li>
+                        <li id="open">
+                            <a href="#">
+                                打开
+                            </a>
+                        </li>
+                        <li id="save"><a href="#">保存</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">编辑</a>
+                    <ul>
+                        <li><a href="#">撤销</a></li>
+                        <li><a href="#">清空</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">视图</a>
+                    <ul>
+                        <li id="tool"><a href="#">工具栏</a></li>
+                        <li id="board"><a href="#">色板</a></li>
+                        <li id="statusBar"><a gref="#">状态栏</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#">帮助</a>
+                    <ul>
+                        <li id="information"><a href="#">关于画板</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="toolBar">
+            <div class="toolBar-left">
+                <div class="shape" id="shape">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div id="eleven"></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="type" id="type">
+                    <div id="category">
+                        <p class="one">——</p>
+                        <p class="two">——</p>
+                        <p class="three">——</p>
+                        <p class="four">——</p>
+                        <p class="five">——</p>
+                    </div>
+                </div>
+            </div>
+            <div class="toolBar-right" id="Right">
+                <canvas id="myCanvas"></canvas>
+            </div>
+        </div>
+        <div class="palette">
+            <div class="color" id="color">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="foot">
+            <span>For Help,click Help Topics on the Help Menu.</span>
+        </div>
+    </div>
+</body>
+<script>
+    var xinjian=document.getElementById("xinjian");//新建
+    var Open=document.getElementById("open");//打开
+    var save=document.getElementById("save");//保存
+    var myCanvas=document.getElementById("myCanvas");//画布
+    var eleven=document.getElementById("eleven");//直线
+    var category=document.getElementById("category");//线条粗细
+
+    /* 视图的二级菜单包括工具栏、色板、状态栏，
+     点击对应二级菜单可以切换工具栏、色版、状态的显示与隐藏*/
+    var tool=document.getElementById("tool");
+    var board=document.getElementById("board");
+    var statusBar=document.getElementById("statusBar");
+    var shape=document.getElementById("shape");
+    var color=document.getElementById("color");
+    var type=document.getElementById("type");
+    var information=document.getElementById("information");
+    var ctx=myCanvas.getContext("2d");
+    var img=new Image();
+    img.src="./img/umbrella";
+    Open.onclick=function(){
+        
+    }
+    // Open.onclick=function(){
+    //     file1.style.display="block";
+    //     btn1.style.display="block";
+    // }
+    // window.onload=function(){
+    //     if(window.FileReader){
+    //         btn1.onclick=function(){
+    //             var reader=new FileReader();
+    //             if(file1.files){
+    //                 var fileobj=file1.files[0];
+    //                 var imgData=reader.readAsDataURL(fileobj);
+    //                 reader.onload=function(){
+    //                     var imgData=reader.result;
+    //                     var imgNode=document.createElement('img');
+    //                     imgNode.src=imgData;
+    //                     myCanvas.appendChild(imgNode);
+    //                 }
+    //             }
+    //         }
+    //     }else{
+    //         alert("当前浏览器不支持FileReader");
+    //     }
+    // }
+    
+    eleven.onclick=function(){
+        category.style.display="block";
+    }
+    tool.onclick=function(){
+        if(shape.style.display=="none"){
+            shape.style.display="block";
+        }else{
+            shape.style.display="none";
+        }
+    }
+    board.onclick=function(){
+        if(color.style.display=="none"){
+            color.style.display="block";
+        }else{
+            color.style.display="none";
+        }
+    }
+    statusBar.onclick=function(){
+        if(type.style.display=="none"){
+            type.style.display="block";
+        }else{
+            type.style.display="none";
+        }
+    }
+    information.onclick=function(){
+        alert("可以对图片做简单的处理，比如图片大小，图片颜色，图片形状，添加文字说明，涂色上料，标记等一系列操作。");
+    }
+</script>
+</html>
